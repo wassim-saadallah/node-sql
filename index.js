@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 var filebuffer = fs.readFileSync('db.sqlite');
 var db = new sql.Database(filebuffer);
 
-var port = process.env.PORT || 8083;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 var router = express.Router();              
 
 var id_post = 1;
