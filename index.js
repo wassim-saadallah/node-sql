@@ -3,6 +3,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 var sql = require('./sql.js-master/js/sql.js');
 var fs = require('fs');
+var firebase = require('firebase');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -11,11 +12,10 @@ app.use(bodyParser.json());
 var filebuffer = fs.readFileSync('db.sqlite');
 var db = new sql.Database(filebuffer);
 
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var port = process.env.PORT || 8080;
 var router = express.Router();              
 
-var id_post = 1;
+var id_post = 1;    
 var id_comment = 1;
 
 router.get('/', function(req, res) {
